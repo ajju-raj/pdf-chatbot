@@ -2,7 +2,7 @@ import { PDFLoader } from "langchain/loaders/fs";
 import { NextRequest, NextResponse } from "next/server";
 import { PineconeClient } from "@pinecone-database/pinecone";
 import {OpenAIEmbeddings} from "@langchain/openai"
-import { PineconeStore } from "@langchain/pinecone";
+import { PineconeStore } from "langchain/vectorstores/pinecone";
 
 export async function POST(request: NextRequest) {
   // Extract FormData from the request
