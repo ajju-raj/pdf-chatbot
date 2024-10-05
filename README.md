@@ -1,3 +1,105 @@
+# Your Project Name
+
+## Overview
+
+This project is designed to leverage Langchain for document loading and embedding, using Pinecone for vector storage. The application allows users to load PDF documents, process their content, and store embeddings in a Pinecone database.
+
+## Features
+
+- Load PDF documents using `PDFLoader`.
+- Generate embeddings with OpenAI's embeddings model.
+- Store and retrieve document embeddings using Pinecone.
+- Built with Next.js for a responsive web application experience.
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/en/download/) (v14 or later)
+- [npm](https://www.npmjs.com/get-npm) (Node package manager)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/yourproject.git
+   cd yourproject
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up your environment variables:
+
+   Create a `.env` file in the root of your project and add your Pinecone and OpenAI API keys:
+
+   ```plaintext
+   PINECONE_API_KEY=your_pinecone_api_key
+   OPENAI_API_KEY=your_openai_api_key
+   ```
+
+### Usage
+
+1. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and navigate to `http://localhost:3000`.
+
+3. Upload your PDF documents through the provided interface, and the application will process and embed them using the Langchain library.
+
+### Example Code
+
+Here’s a simple example of how to use `PDFLoader` and store embeddings in Pinecone:
+
+```javascript
+import { PDFLoader } from "langchain/loaders"; // Update the import based on the correct path
+import { PineconeClient } from "@pinecone-database/pinecone";
+import { OpenAIEmbeddings } from "@langchain/openai";
+
+// Load PDF
+const loader = new PDFLoader("path/to/document.pdf");
+const documents = await loader.load();
+
+// Generate embeddings
+const embeddings = new OpenAIEmbeddings();
+const embeddedDocs = await embeddings.embedDocuments(documents);
+
+// Store in Pinecone
+const pineconeClient = new PineconeClient();
+const pineconeIndex = pineconeClient.Index("your_index_name");
+await pineconeIndex.upsert(embeddedDocs);
+```
+
+## Troubleshooting
+
+- If you encounter issues with `PDFLoader`, ensure you are using the correct import path based on the `langchain` package version.
+- Make sure your API keys are valid and have the necessary permissions.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request or open an issue.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Langchain](https://langchain.com/)
+- [Pinecone](https://www.pinecone.io/)
+- [OpenAI](https://openai.com/)
+
+## Module
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
